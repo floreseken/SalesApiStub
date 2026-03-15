@@ -47,6 +47,7 @@ builder.Services.AddOpenApi("v1", options =>
 
 // ── Application services ──────────────────────────────────────────────────────
 builder.Services.AddSingleton<ProductService>();
+builder.Services.AddSingleton<OrderService>();
 
 // ── Build and configure middleware pipeline ───────────────────────────────────
 var app = builder.Build();

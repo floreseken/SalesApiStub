@@ -7,6 +7,8 @@ namespace SalesApiStub.Services;
 /// </summary>
 public class ProductService
 {
+    private static readonly object SyncRoot = new();
+
     private static readonly List<Product> Products =
     [
         new()
@@ -115,4 +117,55 @@ public class ProductService
             .Where(p => p.Category.Equals(category, StringComparison.OrdinalIgnoreCase) && p.StockQuantity > 0)
             .ToList()
             .AsReadOnly();
+
+    /// <summary>
+    /// Attempts to reserve stock for all requested lines atomically.
+    /// </summary>
+    public bool TryReserveStock(
+        IReadOnlyList<OrderItemRequest> orderItems,
+        out IReadOnlyList<Product> reservedProducts,
+        out string? errorMessage)
+    {
+        reservedProducts = [];
+        errorMessage = null;
+
+        lock (SyncRoot)
+        {
+            var normalizedItems = orderItems
+                .GroupBy(i => i.ProductId)
+                .Select(g => new { ProductId = g.Key, Quantity = g.Sum(x => x.Quantity) })
+                .ToList();
+
+            var productsById = new Dictionary<int, Product>();
+
+            foreach (var item in normalizedItems)
+            {
+                var product = Products.FirstOrDefault(p => p.Id == item.ProductId);
+                if (product is null)
+                {
+                    errorMessage = $"Product with ID {item.ProductId} was not found.";
+                    return false;
+                }
+
+                if (product.StockQuantity < item.Quantity)
+                {
+                    errorMessage =
+                        $"Insufficient stock for product '{product.Name}' (ID {product.Id}). Requested {item.Quantity}, available {product.StockQuantity}.";
+                    return false;
+                }
+
+                productsById[item.ProductId] = product;
+            }
+
+            foreach (var item in normalizedItems)
+            {
+                var product = productsById[item.ProductId];
+                product.StockQuantity -= item.Quantity;
+                product.LastUpdated = DateTime.UtcNow;
+            }
+
+            reservedProducts = productsById.Values.ToList().AsReadOnly();
+            return true;
+        }
+    }
 }

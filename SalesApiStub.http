@@ -1,6 +1,33 @@
 @SalesApiStub_HostAddress = http://localhost:5234
 
-GET {{SalesApiStub_HostAddress}}/weatherforecast/
-Accept: application/json
+### Request an OAuth access token
+POST {{SalesApiStub_HostAddress}}/oauth/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials&client_id=demo-client&client_secret=demo-secret&scope=sales:read
+
+###
+@accessToken = REPLACE_WITH_TOKEN
+
+### Submit a new order
+POST {{SalesApiStub_HostAddress}}/api/sales/orders
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+	"customerId": "CUST-1001",
+	"customerEmail": "customer@example.com",
+	"shippingAddress": "123 Main St, Seattle, WA 98101",
+	"items": [
+		{
+			"productId": 1,
+			"quantity": 2
+		},
+		{
+			"productId": 9,
+			"quantity": 1
+		}
+	]
+}
 
 ###
