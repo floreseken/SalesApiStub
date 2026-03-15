@@ -31,3 +31,10 @@ Content-Type: application/json
 }
 
 ###
+
+### Get identity details for current token
+GET {{SalesApiStub_HostAddress}}/api/sales/my-info
+Authorization: Bearer {{accessToken}}
+Accept: application/json
+
+###
