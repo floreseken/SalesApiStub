@@ -1,0 +1,118 @@
+using SalesApiStub.Models;
+
+namespace SalesApiStub.Services;
+
+/// <summary>
+/// In-memory stub data service providing product inventory and pricing information.
+/// </summary>
+public class ProductService
+{
+    private static readonly List<Product> Products =
+    [
+        new()
+        {
+            Id = 1, Sku = "ELEC-001", Name = "Wireless Headphones Pro",
+            Description = "High-fidelity wireless headphones with active noise cancellation and 30-hour battery life.",
+            Category = "Electronics", Price = 299.99m, Currency = "USD",
+            StockQuantity = 45, LastUpdated = DateTime.UtcNow.AddDays(-2)
+        },
+        new()
+        {
+            Id = 2, Sku = "ELEC-002", Name = "Smart Watch Series X",
+            Description = "Advanced smartwatch with health tracking, GPS, and 7-day battery life.",
+            Category = "Electronics", Price = 449.99m, Currency = "USD",
+            StockQuantity = 30, LastUpdated = DateTime.UtcNow.AddDays(-1)
+        },
+        new()
+        {
+            Id = 3, Sku = "ELEC-003", Name = "Portable Bluetooth Speaker",
+            Description = "Waterproof outdoor speaker with 360° sound and 20-hour playback.",
+            Category = "Electronics", Price = 129.99m, Currency = "USD",
+            StockQuantity = 120, LastUpdated = DateTime.UtcNow.AddDays(-5)
+        },
+        new()
+        {
+            Id = 4, Sku = "ELEC-004", Name = "4K Webcam Ultra",
+            Description = "4K resolution webcam with built-in ring light and auto-focus for professional video calls.",
+            Category = "Electronics", Price = 159.99m, Currency = "USD",
+            StockQuantity = 0, LastUpdated = DateTime.UtcNow.AddDays(-1)   // out of stock example
+        },
+        new()
+        {
+            Id = 5, Sku = "CLTH-001", Name = "Men's Performance Jacket",
+            Description = "Lightweight windproof jacket with moisture-wicking fabric. Available in multiple sizes.",
+            Category = "Clothing", Price = 89.99m, Currency = "USD",
+            StockQuantity = 75, LastUpdated = DateTime.UtcNow.AddDays(-3)
+        },
+        new()
+        {
+            Id = 6, Sku = "CLTH-002", Name = "Athletic Sneakers",
+            Description = "Breathable running shoes with memory foam insole and durable rubber outsole.",
+            Category = "Clothing", Price = 119.99m, Currency = "USD",
+            StockQuantity = 60, LastUpdated = DateTime.UtcNow.AddDays(-4)
+        },
+        new()
+        {
+            Id = 7, Sku = "HOME-001", Name = "Smart Coffee Maker",
+            Description = "Programmable coffee maker with smartphone connectivity and built-in grinder.",
+            Category = "Home & Kitchen", Price = 199.99m, Currency = "USD",
+            StockQuantity = 25, LastUpdated = DateTime.UtcNow.AddDays(-7)
+        },
+        new()
+        {
+            Id = 8, Sku = "HOME-002", Name = "Air Purifier HEPA Plus",
+            Description = "True HEPA filter air purifier covering up to 600 sq ft with auto mode and air quality display.",
+            Category = "Home & Kitchen", Price = 279.99m, Currency = "USD",
+            StockQuantity = 18, LastUpdated = DateTime.UtcNow.AddDays(-6)
+        },
+        new()
+        {
+            Id = 9, Sku = "BOOK-001", Name = "Clean Code: A Handbook",
+            Description = "Essential guide to writing clean, maintainable, and readable code by Robert C. Martin.",
+            Category = "Books", Price = 34.99m, Currency = "USD",
+            StockQuantity = 200, LastUpdated = DateTime.UtcNow.AddDays(-10)
+        },
+        new()
+        {
+            Id = 10, Sku = "BOOK-002", Name = "Domain-Driven Design",
+            Description = "Tackling complexity in the heart of software by Eric Evans. A must-read for architects.",
+            Category = "Books", Price = 49.99m, Currency = "USD",
+            StockQuantity = 85, LastUpdated = DateTime.UtcNow.AddDays(-8)
+        },
+        new()
+        {
+            Id = 11, Sku = "SPRT-001", Name = "Yoga Mat Premium",
+            Description = "Non-slip 6mm thick yoga mat with alignment lines, carrying strap, and eco-friendly material.",
+            Category = "Sports", Price = 59.99m, Currency = "USD",
+            StockQuantity = 150, LastUpdated = DateTime.UtcNow.AddDays(-3)
+        },
+        new()
+        {
+            Id = 12, Sku = "SPRT-002", Name = "Adjustable Dumbbell Set",
+            Description = "Space-saving adjustable dumbbells ranging from 5 to 52.5 lbs with quick-release dial.",
+            Category = "Sports", Price = 349.99m, Currency = "USD",
+            StockQuantity = 15, LastUpdated = DateTime.UtcNow.AddDays(-2)
+        },
+    ];
+
+    /// <summary>Returns all products regardless of stock status.</summary>
+    public IReadOnlyList<Product> GetAll() => Products.AsReadOnly();
+
+    /// <summary>Returns only products that are currently in stock (StockQuantity > 0).</summary>
+    public IReadOnlyList<Product> GetInStock() =>
+        Products.Where(p => p.StockQuantity > 0).ToList().AsReadOnly();
+
+    /// <summary>Returns a single product by its ID, or <c>null</c> if not found.</summary>
+    public Product? GetById(int id) => Products.FirstOrDefault(p => p.Id == id);
+
+    /// <summary>Returns all distinct category names, ordered alphabetically.</summary>
+    public IReadOnlyList<string> GetCategories() =>
+        Products.Select(p => p.Category).Distinct().Order().ToList().AsReadOnly();
+
+    /// <summary>Returns in-stock products filtered by category (case-insensitive).</summary>
+    public IReadOnlyList<Product> GetByCategory(string category) =>
+        Products
+            .Where(p => p.Category.Equals(category, StringComparison.OrdinalIgnoreCase) && p.StockQuantity > 0)
+            .ToList()
+            .AsReadOnly();
+}
