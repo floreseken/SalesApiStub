@@ -23,6 +23,9 @@ public class Product
     /// <summary>The ISO 4217 currency code for the price (e.g. EUR).</summary>
     public string Currency { get; set; } = "EUR";
 
+    /// <summary>The sales unit used for pricing and stock accounting.</summary>
+    public Unit Unit { get; set; }
+
     /// <summary>The number of units currently available in stock.</summary>
     public decimal StockQuantity { get; set; }
 

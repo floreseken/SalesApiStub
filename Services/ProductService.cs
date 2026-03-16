@@ -16,84 +16,84 @@ public class ProductService
             Id = 1, Name = "Wireless Headphones Pro",
             Description = "High-fidelity wireless headphones with active noise cancellation and 30-hour battery life.",
             Category = "Electronics", Price = 299.99m, Currency = "USD",
-            StockQuantity = 45
+            Unit = Unit.PerPiece, StockQuantity = 45, KgsPerUnit = 10
         },
         new()
         {
             Id = 2, Name = "Smart Watch Series X",
             Description = "Advanced smartwatch with health tracking, GPS, and 7-day battery life.",
             Category = "Electronics", Price = 449.99m, Currency = "USD",
-            StockQuantity = 30
+            Unit = Unit.PerPiece, StockQuantity = 30, KgsPerUnit = 10
         },
         new()
         {
             Id = 3, Name = "Portable Bluetooth Speaker",
             Description = "Waterproof outdoor speaker with 360° sound and 20-hour playback.",
             Category = "Electronics", Price = 129.99m, Currency = "USD",
-            StockQuantity = 120
+            Unit = Unit.PerPiece, StockQuantity = 120, KgsPerUnit = 10
         },
         new()
         {
             Id = 4, Name = "4K Webcam Ultra",
             Description = "4K resolution webcam with built-in ring light and auto-focus for professional video calls.",
             Category = "Electronics", Price = 159.99m, Currency = "USD",
-            StockQuantity = 0
+            Unit = Unit.PerPiece, StockQuantity = 0, KgsPerUnit = 10
         },
         new()
         {
             Id = 5, Name = "Men's Performance Jacket",
             Description = "Lightweight windproof jacket with moisture-wicking fabric. Available in multiple sizes.",
             Category = "Clothing", Price = 89.99m, Currency = "USD",
-            StockQuantity = 75
+            Unit = Unit.PerPiece, StockQuantity = 75, KgsPerUnit = 10
         },
         new()
         {
             Id = 6, Name = "Athletic Sneakers",
             Description = "Breathable running shoes with memory foam insole and durable rubber outsole.",
             Category = "Clothing", Price = 119.99m, Currency = "USD",
-            StockQuantity = 60
+            Unit = Unit.PerPiece, StockQuantity = 60, KgsPerUnit = 10
         },
         new()
         {
             Id = 7, Name = "Smart Coffee Maker",
             Description = "Programmable coffee maker with smartphone connectivity and built-in grinder.",
             Category = "Home & Kitchen", Price = 199.99m, Currency = "USD",
-            StockQuantity = 25
+            Unit = Unit.PerPiece, StockQuantity = 25, KgsPerUnit = 10
         },
         new()
         {
             Id = 8, Name = "Air Purifier HEPA Plus",
             Description = "True HEPA filter air purifier covering up to 600 sq ft with auto mode and air quality display.",
             Category = "Home & Kitchen", Price = 279.99m, Currency = "USD",
-            StockQuantity = 18
+            Unit = Unit.PerPiece, StockQuantity = 18, KgsPerUnit = 10
         },
         new()
         {
             Id = 9, Name = "Clean Code: A Handbook",
             Description = "Essential guide to writing clean, maintainable, and readable code by Robert C. Martin.",
             Category = "Books", Price = 34.99m, Currency = "USD",
-            StockQuantity = 200
+            Unit = Unit.PerPiece, StockQuantity = 200, KgsPerUnit = 10
         },
         new()
         {
             Id = 10, Name = "Domain-Driven Design",
             Description = "Tackling complexity in the heart of software by Eric Evans. A must-read for architects.",
             Category = "Books", Price = 49.99m, Currency = "USD",
-            StockQuantity = 85
+            Unit = Unit.PerPiece, StockQuantity = 85, KgsPerUnit = 10
         },
         new()
         {
             Id = 11, Name = "Yoga Mat Premium",
             Description = "Non-slip 6mm thick yoga mat with alignment lines, carrying strap, and eco-friendly material.",
             Category = "Sports", Price = 59.99m, Currency = "USD",
-            StockQuantity = 150
+            Unit = Unit.PerPiece, StockQuantity = 150, KgsPerUnit = 10
         },
         new()
         {
             Id = 12, Name = "Adjustable Dumbbell Set",
             Description = "Space-saving adjustable dumbbells ranging from 5 to 52.5 lbs with quick-release dial.",
             Category = "Sports", Price = 349.99m, Currency = "USD",
-            StockQuantity = 15
+            Unit = Unit.PerPiece, StockQuantity = 15, KgsPerUnit = 10
         },
     ];
 
