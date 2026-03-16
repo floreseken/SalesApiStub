@@ -16,6 +16,37 @@ namespace SalesApiStub.Controllers;
 [Produces("application/json")]
 public class MyInfoController : ControllerBase
 {
+    private static readonly CompanyInfo CompanyProfile = new()
+    {
+        Name = "Contoso Sales",
+        Industry = "Retail",
+        SupportEmail = "support@contoso.example"
+    };
+
+    private static readonly List<Address> CompanyAddresses =
+    [
+        new()
+        {
+            Id = "addr-hq-sea",
+            Label = "HQ",
+            Line1 = "1 Market St",
+            City = "Seattle",
+            Region = "WA",
+            PostalCode = "98101",
+            Country = "US"
+        },
+        new()
+        {
+            Id = "addr-warehouse-tac",
+            Label = "Warehouse",
+            Line1 = "500 Distribution Ave",
+            City = "Tacoma",
+            Region = "WA",
+            PostalCode = "98421",
+            Country = "US"
+        }
+    ];
+
     /// <summary>
     /// Get identity information derived from the current Bearer token.
     /// </summary>
@@ -54,7 +85,25 @@ public class MyInfoController : ControllerBase
             ClientId = clientId,
             Scopes = scopes,
             ExpiresAtUtc = expiresAtUtc,
-            Claims = claims
+            Claims = claims,
+            Company = new CompanyInfo
+            {
+                Name = CompanyProfile.Name,
+                Industry = CompanyProfile.Industry,
+                SupportEmail = CompanyProfile.SupportEmail
+            },
+            KnownAddresses = CompanyAddresses
+                .Select(address => new Address
+                {
+                    Id = address.Id,
+                    Label = address.Label,
+                    Line1 = address.Line1,
+                    City = address.City,
+                    Region = address.Region,
+                    PostalCode = address.PostalCode,
+                    Country = address.Country
+                })
+                .ToList()
         });
     }
 }
