@@ -24,5 +24,5 @@ public class MyInfoResponse
     public CompanyInfo Company { get; set; } = new();
 
     /// <summary>A list of known company addresses.</summary>
-    public List<Address> KnownAddresses { get; set; } = [];
+    public List<Address> Addresses { get; set; } = [];
 }

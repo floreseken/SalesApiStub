@@ -17,9 +17,6 @@ public class Address
     /// <summary>The city or locality.</summary>
     public string City { get; set; } = string.Empty;
 
-    /// <summary>The state, province, or region.</summary>
-    public string Region { get; set; } = string.Empty;
-
     /// <summary>The postal or ZIP code.</summary>
     public string PostalCode { get; set; } = string.Empty;
 

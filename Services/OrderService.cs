@@ -44,7 +44,6 @@ public class OrderService
             return new OrderLineResponse
             {
                 ProductId = product.Id,
-                Sku = product.Sku,
                 ProductName = product.Name,
                 Quantity = item.Quantity,
                 UnitPrice = product.Price,
@@ -66,10 +65,8 @@ public class OrderService
         var createdOrder = new OrderResponse
         {
             OrderId = Guid.NewGuid(),
-            CustomerId = request.CustomerId,
-            CustomerEmail = request.CustomerEmail,
-            ShippingAddress = request.ShippingAddress,
-            Currency = currencies[0].ToUpperInvariant(),
+            ShippingAddressId = request.ShippingAddressId,
+            Currency = "EUR",
             Subtotal = subtotal,
             Tax = tax,
             Total = total,

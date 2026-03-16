@@ -19,8 +19,8 @@ public class MyInfoController : ControllerBase
     private static readonly CompanyInfo CompanyProfile = new()
     {
         Name = "Contoso Sales",
-        Industry = "Retail",
-        SupportEmail = "support@contoso.example"
+        ContactName = "Retail",
+        Email = "support@contoso.example"
     };
 
     private static readonly List<Address> CompanyAddresses =
@@ -31,7 +31,6 @@ public class MyInfoController : ControllerBase
             Label = "HQ",
             Line1 = "1 Market St",
             City = "Seattle",
-            Region = "WA",
             PostalCode = "98101",
             Country = "US"
         },
@@ -41,7 +40,6 @@ public class MyInfoController : ControllerBase
             Label = "Warehouse",
             Line1 = "500 Distribution Ave",
             City = "Tacoma",
-            Region = "WA",
             PostalCode = "98421",
             Country = "US"
         }
@@ -89,17 +87,16 @@ public class MyInfoController : ControllerBase
             Company = new CompanyInfo
             {
                 Name = CompanyProfile.Name,
-                Industry = CompanyProfile.Industry,
-                SupportEmail = CompanyProfile.SupportEmail
+                ContactName = CompanyProfile.ContactName,
+                Email = CompanyProfile.Email
             },
-            KnownAddresses = CompanyAddresses
+            Addresses = CompanyAddresses
                 .Select(address => new Address
                 {
                     Id = address.Id,
                     Label = address.Label,
                     Line1 = address.Line1,
                     City = address.City,
-                    Region = address.Region,
                     PostalCode = address.PostalCode,
                     Country = address.Country
                 })

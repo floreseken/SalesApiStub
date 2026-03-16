@@ -7,7 +7,7 @@ Content-Type: application/x-www-form-urlencoded
 grant_type=client_credentials&client_id=demo-client&client_secret=demo-secret&scope=sales:read
 
 ###
-@accessToken = REPLACE_WITH_TOKEN
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkZW1vLWNsaWVudCIsImp0aSI6ImIwOTY0ZmFmLWY2ZTQtNGFjMy1iYzM0LTA4MDY1YzY2OTUyNyIsImNsaWVudF9pZCI6ImRlbW8tY2xpZW50Iiwic2NvcGUiOiJzYWxlczpyZWFkIiwiZXhwIjoxNzczNjQzNzQwLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MDY1IiwiYXVkIjoic2FsZXMtYXBpIn0.Nc7vO6K2k8pXimusNQ4nflSBDS5Care_dgbcRKqs6aM
 
 ### Submit a new order
 POST {{SalesApiStub_HostAddress}}/api/sales/orders

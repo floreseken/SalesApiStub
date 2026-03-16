@@ -13,87 +13,87 @@ public class ProductService
     [
         new()
         {
-            Id = 1, Sku = "ELEC-001", Name = "Wireless Headphones Pro",
+            Id = 1, Name = "Wireless Headphones Pro",
             Description = "High-fidelity wireless headphones with active noise cancellation and 30-hour battery life.",
             Category = "Electronics", Price = 299.99m, Currency = "USD",
-            StockQuantity = 45, LastUpdated = DateTime.UtcNow.AddDays(-2)
+            StockQuantity = 45
         },
         new()
         {
-            Id = 2, Sku = "ELEC-002", Name = "Smart Watch Series X",
+            Id = 2, Name = "Smart Watch Series X",
             Description = "Advanced smartwatch with health tracking, GPS, and 7-day battery life.",
             Category = "Electronics", Price = 449.99m, Currency = "USD",
-            StockQuantity = 30, LastUpdated = DateTime.UtcNow.AddDays(-1)
+            StockQuantity = 30
         },
         new()
         {
-            Id = 3, Sku = "ELEC-003", Name = "Portable Bluetooth Speaker",
+            Id = 3, Name = "Portable Bluetooth Speaker",
             Description = "Waterproof outdoor speaker with 360° sound and 20-hour playback.",
             Category = "Electronics", Price = 129.99m, Currency = "USD",
-            StockQuantity = 120, LastUpdated = DateTime.UtcNow.AddDays(-5)
+            StockQuantity = 120
         },
         new()
         {
-            Id = 4, Sku = "ELEC-004", Name = "4K Webcam Ultra",
+            Id = 4, Name = "4K Webcam Ultra",
             Description = "4K resolution webcam with built-in ring light and auto-focus for professional video calls.",
             Category = "Electronics", Price = 159.99m, Currency = "USD",
-            StockQuantity = 0, LastUpdated = DateTime.UtcNow.AddDays(-1)   // out of stock example
+            StockQuantity = 0
         },
         new()
         {
-            Id = 5, Sku = "CLTH-001", Name = "Men's Performance Jacket",
+            Id = 5, Name = "Men's Performance Jacket",
             Description = "Lightweight windproof jacket with moisture-wicking fabric. Available in multiple sizes.",
             Category = "Clothing", Price = 89.99m, Currency = "USD",
-            StockQuantity = 75, LastUpdated = DateTime.UtcNow.AddDays(-3)
+            StockQuantity = 75
         },
         new()
         {
-            Id = 6, Sku = "CLTH-002", Name = "Athletic Sneakers",
+            Id = 6, Name = "Athletic Sneakers",
             Description = "Breathable running shoes with memory foam insole and durable rubber outsole.",
             Category = "Clothing", Price = 119.99m, Currency = "USD",
-            StockQuantity = 60, LastUpdated = DateTime.UtcNow.AddDays(-4)
+            StockQuantity = 60
         },
         new()
         {
-            Id = 7, Sku = "HOME-001", Name = "Smart Coffee Maker",
+            Id = 7, Name = "Smart Coffee Maker",
             Description = "Programmable coffee maker with smartphone connectivity and built-in grinder.",
             Category = "Home & Kitchen", Price = 199.99m, Currency = "USD",
-            StockQuantity = 25, LastUpdated = DateTime.UtcNow.AddDays(-7)
+            StockQuantity = 25
         },
         new()
         {
-            Id = 8, Sku = "HOME-002", Name = "Air Purifier HEPA Plus",
+            Id = 8, Name = "Air Purifier HEPA Plus",
             Description = "True HEPA filter air purifier covering up to 600 sq ft with auto mode and air quality display.",
             Category = "Home & Kitchen", Price = 279.99m, Currency = "USD",
-            StockQuantity = 18, LastUpdated = DateTime.UtcNow.AddDays(-6)
+            StockQuantity = 18
         },
         new()
         {
-            Id = 9, Sku = "BOOK-001", Name = "Clean Code: A Handbook",
+            Id = 9, Name = "Clean Code: A Handbook",
             Description = "Essential guide to writing clean, maintainable, and readable code by Robert C. Martin.",
             Category = "Books", Price = 34.99m, Currency = "USD",
-            StockQuantity = 200, LastUpdated = DateTime.UtcNow.AddDays(-10)
+            StockQuantity = 200
         },
         new()
         {
-            Id = 10, Sku = "BOOK-002", Name = "Domain-Driven Design",
+            Id = 10, Name = "Domain-Driven Design",
             Description = "Tackling complexity in the heart of software by Eric Evans. A must-read for architects.",
             Category = "Books", Price = 49.99m, Currency = "USD",
-            StockQuantity = 85, LastUpdated = DateTime.UtcNow.AddDays(-8)
+            StockQuantity = 85
         },
         new()
         {
-            Id = 11, Sku = "SPRT-001", Name = "Yoga Mat Premium",
+            Id = 11, Name = "Yoga Mat Premium",
             Description = "Non-slip 6mm thick yoga mat with alignment lines, carrying strap, and eco-friendly material.",
             Category = "Sports", Price = 59.99m, Currency = "USD",
-            StockQuantity = 150, LastUpdated = DateTime.UtcNow.AddDays(-3)
+            StockQuantity = 150
         },
         new()
         {
-            Id = 12, Sku = "SPRT-002", Name = "Adjustable Dumbbell Set",
+            Id = 12, Name = "Adjustable Dumbbell Set",
             Description = "Space-saving adjustable dumbbells ranging from 5 to 52.5 lbs with quick-release dial.",
             Category = "Sports", Price = 349.99m, Currency = "USD",
-            StockQuantity = 15, LastUpdated = DateTime.UtcNow.AddDays(-2)
+            StockQuantity = 15
         },
     ];
 
@@ -161,7 +161,6 @@ public class ProductService
             {
                 var product = productsById[item.ProductId];
                 product.StockQuantity -= item.Quantity;
-                product.LastUpdated = DateTime.UtcNow;
             }
 
             reservedProducts = productsById.Values.ToList().AsReadOnly();

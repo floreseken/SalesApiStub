@@ -8,9 +8,6 @@ public class Product
     /// <summary>The unique identifier of the product.</summary>
     public int Id { get; set; }
 
-    /// <summary>The Stock Keeping Unit code uniquely identifying this product variant.</summary>
-    public string Sku { get; set; } = string.Empty;
-
     /// <summary>The display name of the product.</summary>
     public string Name { get; set; } = string.Empty;
 
@@ -23,15 +20,12 @@ public class Product
     /// <summary>The retail price of the product.</summary>
     public decimal Price { get; set; }
 
-    /// <summary>The ISO 4217 currency code for the price (e.g. USD).</summary>
-    public string Currency { get; set; } = "USD";
+    /// <summary>The ISO 4217 currency code for the price (e.g. EUR).</summary>
+    public string Currency { get; set; } = "EUR";
 
     /// <summary>The number of units currently available in stock.</summary>
-    public int StockQuantity { get; set; }
+    public decimal StockQuantity { get; set; }
 
-    /// <summary>Indicates whether this product is currently in stock.</summary>
-    public bool InStock => StockQuantity > 0;
-
-    /// <summary>The UTC timestamp of the last inventory update.</summary>
-    public DateTime LastUpdated { get; set; }
+    /// <summary>The weight of a single unit of the product in kilograms.</summary>
+    public decimal KgsPerUnit { get; set; }
 }
