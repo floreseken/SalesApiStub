@@ -31,4 +31,10 @@ public class Product
 
     /// <summary>The weight of a single unit of the product in kilograms.</summary>
     public decimal KgsPerUnit { get; set; }
+
+    /// <summary>
+    /// Dynamic product specifications represented as key/value pairs
+    /// (for example: OuterDiameter, Weight, InnerDiameter).
+    /// </summary>
+    public Dictionary<string, string> Specs { get; set; } = new(StringComparer.OrdinalIgnoreCase);
 }

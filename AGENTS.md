@@ -52,4 +52,5 @@
 
 ## Known Drift Watchouts
 - `SalesApiStub.http` currently shows order fields (`customerId`, `customerEmail`, `shippingAddress`) that do not match `Models/CreateOrderRequest.cs`; reconcile examples before calling the smoke flow "verified".
+- `Services/OrderService.cs` currently sets `OrderResponse.Currency = "EUR"` even though catalog products in `Services/ProductService.cs` use `Currency = "USD"`; avoid assuming order currency is derived from reserved product currency until this is reconciled.
 

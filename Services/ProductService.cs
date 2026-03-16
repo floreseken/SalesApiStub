@@ -16,84 +16,168 @@ public class ProductService
             Id = 1, Name = "Wireless Headphones Pro",
             Description = "High-fidelity wireless headphones with active noise cancellation and 30-hour battery life.",
             Category = "Electronics", Price = 299.99m, Currency = "USD",
-            Unit = Unit.PerPiece, StockQuantity = 45, KgsPerUnit = 10
+            Unit = Unit.PerPiece, StockQuantity = 45, KgsPerUnit = 10,
+            Specs = new Dictionary<string, string>
+            {
+                ["Weight"] = "0.31 kg",
+                ["DriverSize"] = "40 mm",
+                ["BatteryLife"] = "30 h",
+                ["Bluetooth"] = "5.3"
+            }
         },
         new()
         {
             Id = 2, Name = "Smart Watch Series X",
             Description = "Advanced smartwatch with health tracking, GPS, and 7-day battery life.",
             Category = "Electronics", Price = 449.99m, Currency = "USD",
-            Unit = Unit.PerPiece, StockQuantity = 30, KgsPerUnit = 10
+            Unit = Unit.PerPiece, StockQuantity = 30, KgsPerUnit = 10,
+            Specs = new Dictionary<string, string>
+            {
+                ["Weight"] = "0.052 kg",
+                ["CaseDiameter"] = "44 mm",
+                ["WaterResistance"] = "5 ATM",
+                ["BatteryLife"] = "7 days"
+            }
         },
         new()
         {
             Id = 3, Name = "Portable Bluetooth Speaker",
             Description = "Waterproof outdoor speaker with 360° sound and 20-hour playback.",
             Category = "Electronics", Price = 129.99m, Currency = "USD",
-            Unit = Unit.PerPiece, StockQuantity = 120, KgsPerUnit = 10
+            Unit = Unit.PerPiece, StockQuantity = 120, KgsPerUnit = 10,
+            Specs = new Dictionary<string, string>
+            {
+                ["Weight"] = "0.68 kg",
+                ["OutputPower"] = "30 W",
+                ["IngressProtection"] = "IP67",
+                ["BatteryLife"] = "20 h"
+            }
         },
         new()
         {
             Id = 4, Name = "4K Webcam Ultra",
             Description = "4K resolution webcam with built-in ring light and auto-focus for professional video calls.",
             Category = "Electronics", Price = 159.99m, Currency = "USD",
-            Unit = Unit.PerPiece, StockQuantity = 0, KgsPerUnit = 10
+            Unit = Unit.PerPiece, StockQuantity = 0, KgsPerUnit = 10,
+            Specs = new Dictionary<string, string>
+            {
+                ["Resolution"] = "3840x2160",
+                ["FrameRate"] = "30 fps",
+                ["FieldOfView"] = "90 deg",
+                ["Focus"] = "Auto"
+            }
         },
         new()
         {
             Id = 5, Name = "Men's Performance Jacket",
             Description = "Lightweight windproof jacket with moisture-wicking fabric. Available in multiple sizes.",
             Category = "Clothing", Price = 89.99m, Currency = "USD",
-            Unit = Unit.PerPiece, StockQuantity = 75, KgsPerUnit = 10
+            Unit = Unit.PerPiece, StockQuantity = 75, KgsPerUnit = 10,
+            Specs = new Dictionary<string, string>
+            {
+                ["Material"] = "Polyester blend",
+                ["Weight"] = "0.42 kg",
+                ["Fit"] = "Regular",
+                ["WeatherResistance"] = "Windproof"
+            }
         },
         new()
         {
             Id = 6, Name = "Athletic Sneakers",
             Description = "Breathable running shoes with memory foam insole and durable rubber outsole.",
             Category = "Clothing", Price = 119.99m, Currency = "USD",
-            Unit = Unit.PerPiece, StockQuantity = 60, KgsPerUnit = 10
+            Unit = Unit.PerPiece, StockQuantity = 60, KgsPerUnit = 10,
+            Specs = new Dictionary<string, string>
+            {
+                ["UpperMaterial"] = "Mesh",
+                ["Weight"] = "0.74 kg (pair)",
+                ["Sole"] = "Rubber",
+                ["Drop"] = "8 mm"
+            }
         },
         new()
         {
             Id = 7, Name = "Smart Coffee Maker",
             Description = "Programmable coffee maker with smartphone connectivity and built-in grinder.",
             Category = "Home & Kitchen", Price = 199.99m, Currency = "USD",
-            Unit = Unit.PerPiece, StockQuantity = 25, KgsPerUnit = 10
+            Unit = Unit.PerPiece, StockQuantity = 25, KgsPerUnit = 10,
+            Specs = new Dictionary<string, string>
+            {
+                ["Capacity"] = "1.5 L",
+                ["Power"] = "1200 W",
+                ["Voltage"] = "120 V",
+                ["Grinder"] = "Conical burr"
+            }
         },
         new()
         {
             Id = 8, Name = "Air Purifier HEPA Plus",
             Description = "True HEPA filter air purifier covering up to 600 sq ft with auto mode and air quality display.",
             Category = "Home & Kitchen", Price = 279.99m, Currency = "USD",
-            Unit = Unit.PerPiece, StockQuantity = 18, KgsPerUnit = 10
+            Unit = Unit.PerPiece, StockQuantity = 18, KgsPerUnit = 10,
+            Specs = new Dictionary<string, string>
+            {
+                ["CoverageArea"] = "600 sq ft",
+                ["CADR"] = "420 m3/h",
+                ["FilterType"] = "True HEPA H13",
+                ["NoiseLevel"] = "24-52 dB"
+            }
         },
         new()
         {
             Id = 9, Name = "Clean Code: A Handbook",
             Description = "Essential guide to writing clean, maintainable, and readable code by Robert C. Martin.",
             Category = "Books", Price = 34.99m, Currency = "USD",
-            Unit = Unit.PerPiece, StockQuantity = 200, KgsPerUnit = 10
+            Unit = Unit.PerPiece, StockQuantity = 200, KgsPerUnit = 10,
+            Specs = new Dictionary<string, string>
+            {
+                ["Format"] = "Paperback",
+                ["Pages"] = "464",
+                ["Language"] = "English",
+                ["ISBN"] = "9780132350884"
+            }
         },
         new()
         {
             Id = 10, Name = "Domain-Driven Design",
             Description = "Tackling complexity in the heart of software by Eric Evans. A must-read for architects.",
             Category = "Books", Price = 49.99m, Currency = "USD",
-            Unit = Unit.PerPiece, StockQuantity = 85, KgsPerUnit = 10
+            Unit = Unit.PerPiece, StockQuantity = 85, KgsPerUnit = 10,
+            Specs = new Dictionary<string, string>
+            {
+                ["Format"] = "Hardcover",
+                ["Pages"] = "560",
+                ["Language"] = "English",
+                ["ISBN"] = "9780321125217"
+            }
         },
         new()
         {
             Id = 11, Name = "Yoga Mat Premium",
             Description = "Non-slip 6mm thick yoga mat with alignment lines, carrying strap, and eco-friendly material.",
             Category = "Sports", Price = 59.99m, Currency = "USD",
-            Unit = Unit.PerPiece, StockQuantity = 150, KgsPerUnit = 10
+            Unit = Unit.PerPiece, StockQuantity = 150, KgsPerUnit = 10,
+            Specs = new Dictionary<string, string>
+            {
+                ["Thickness"] = "6 mm",
+                ["Length"] = "183 cm",
+                ["Width"] = "61 cm",
+                ["Material"] = "TPE"
+            }
         },
         new()
         {
             Id = 12, Name = "Adjustable Dumbbell Set",
             Description = "Space-saving adjustable dumbbells ranging from 5 to 52.5 lbs with quick-release dial.",
             Category = "Sports", Price = 349.99m, Currency = "USD",
-            Unit = Unit.PerPiece, StockQuantity = 15, KgsPerUnit = 10
+            Unit = Unit.PerPiece, StockQuantity = 15, KgsPerUnit = 10,
+            Specs = new Dictionary<string, string>
+            {
+                ["WeightRange"] = "5-52.5 lb",
+                ["Increment"] = "2.5 lb",
+                ["HandleDiameter"] = "35 mm",
+                ["Material"] = "Steel"
+            }
         },
     ];
 
