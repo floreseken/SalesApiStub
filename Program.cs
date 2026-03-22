@@ -68,6 +68,7 @@ app.UseForwardedHeaders();
 // Serves the raw OpenAPI JSON at /openapi/v1.json
 app.MapOpenApi();
 
+var serverUrl = app.Configuration["OpenApi:ServerUrl"];
 // Scalar API reference UI at /docs
 app.MapScalarApiReference("/docs", options =>
 {
@@ -79,6 +80,9 @@ app.MapScalarApiReference("/docs", options =>
                     flows.WithClientCredentials(cc =>
                         cc.WithClientId("demo-client")
                             .WithClientSecret("demo-secret"))));
+
+    if (!string.IsNullOrEmpty(serverUrl))
+        options.Servers = [new ScalarServer(serverUrl)];
 });
 
 app.UseAuthentication();
