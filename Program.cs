@@ -52,7 +52,7 @@ builder.Services.AddSingleton<OrderService>();
 // ── Build and configure middleware pipeline ───────────────────────────────────
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+//if (app.Environment.IsDevelopment())
 {
     // Serves the raw OpenAPI JSON at /openapi/v1.json
     app.MapOpenApi();
