@@ -4,8 +4,19 @@ using Scalar.AspNetCore;
 using SalesApiStub.Services;
 using SalesApiStub.Transformers;
 using System.Text;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor
+                             | ForwardedHeaders.XForwardedProto
+                             | ForwardedHeaders.XForwardedHost;
+
+    options.KnownIPNetworks.Clear();
+    options.KnownProxies.Clear();
+});
 
 // ── Controllers ───────────────────────────────────────────────────────────────
 builder.Services.AddControllers();
@@ -52,24 +63,23 @@ builder.Services.AddSingleton<OrderService>();
 // ── Build and configure middleware pipeline ───────────────────────────────────
 var app = builder.Build();
 
-//if (app.Environment.IsDevelopment())
-{
-    // Serves the raw OpenAPI JSON at /openapi/v1.json
-    app.MapOpenApi();
+app.UseForwardedHeaders();
 
-    // Scalar API reference UI at /docs
-    app.MapScalarApiReference("/docs", options =>
-    {
-        options.WithTitle("Sales API")
-               .WithTheme(ScalarTheme.Kepler)
-               .AddPreferredSecuritySchemes("oauth2")
-               .AddOAuth2Authentication("oauth2", scheme =>
-                    scheme.WithFlows(flows =>
-                        flows.WithClientCredentials(cc =>
-                            cc.WithClientId("demo-client")
-                              .WithClientSecret("demo-secret"))));
-    });
-}
+// Serves the raw OpenAPI JSON at /openapi/v1.json
+app.MapOpenApi();
+
+// Scalar API reference UI at /docs
+app.MapScalarApiReference("/docs", options =>
+{
+    options.WithTitle("Sales API")
+            .WithTheme(ScalarTheme.Kepler)
+            .AddPreferredSecuritySchemes("oauth2")
+            .AddOAuth2Authentication("oauth2", scheme =>
+                scheme.WithFlows(flows =>
+                    flows.WithClientCredentials(cc =>
+                        cc.WithClientId("demo-client")
+                            .WithClientSecret("demo-secret"))));
+});
 
 app.UseAuthentication();
 app.UseAuthorization();
