@@ -23,13 +23,28 @@ public class AuthController : ControllerBase
     /// Request an OAuth 2.0 Bearer access token using the Client Credentials grant.
     /// </summary>
     /// <remarks>
-    /// Submit <c>application/x-www-form-urlencoded</c> body with the following fields:
+    /// Client credentials can be provided in two ways:
+    ///
+    /// **Option 1:** Form body with `client_id` and `client_secret`
     ///
     /// | Field           | Value               |
     /// |-----------------|---------------------|
     /// | grant_type      | client_credentials  |
     /// | client_id       | demo-client         |
     /// | client_secret   | demo-secret         |
+    /// | scope           | sales:read          |
+    ///
+    /// **Option 2:** HTTP Basic Authorization header (RFC 6749 §2.3.1)
+    ///
+    /// ```
+    /// Authorization: Basic &lt;base64(client_id:client_secret)&gt;
+    /// ```
+    ///
+    /// with form body:
+    ///
+    /// | Field           | Value               |
+    /// |-----------------|---------------------|
+    /// | grant_type      | client_credentials  |
     /// | scope           | sales:read          |
     ///
     /// The returned `access_token` must be passed as a `Bearer` token in the
@@ -56,10 +71,22 @@ public class AuthController : ControllerBase
             });
         }
 
+        // Extract credentials from either form body or Basic Authorization header
+        var (clientId, clientSecret) = ExtractCredentials(request);
+
+        if (string.IsNullOrEmpty(clientId) || string.IsNullOrEmpty(clientSecret))
+        {
+            return Unauthorized(new OAuthError
+            {
+                Error = "invalid_client",
+                ErrorDescription = "Client credentials must be provided either in the request body or via HTTP Basic Authorization."
+            });
+        }
+
         var clients = _config.GetSection("OAuth:Clients").Get<List<OAuthClient>>() ?? [];
         var matchedClient = clients.FirstOrDefault(c =>
-            c.ClientId == request.ClientId &&
-            ConstantTimeEquals(c.ClientSecret, request.ClientSecret));
+            c.ClientId == clientId &&
+            ConstantTimeEquals(c.ClientSecret, clientSecret));
 
         if (matchedClient is null)
         {
@@ -90,6 +117,48 @@ public class AuthController : ControllerBase
     }
 
     // ── Private helpers ───────────────────────────────────────────────────────
+
+    /// <summary>
+    /// Extracts client credentials from either the form body or the HTTP Basic Authorization header.
+    /// Form body values take precedence over the Authorization header.
+    /// </summary>
+    private (string? ClientId, string? ClientSecret) ExtractCredentials(TokenRequest request)
+    {
+        // Form body takes precedence
+        if (!string.IsNullOrEmpty(request.ClientId) && !string.IsNullOrEmpty(request.ClientSecret))
+        {
+            return (request.ClientId, request.ClientSecret);
+        }
+
+        // Try to extract from Authorization header
+        var authHeader = Request.Headers.Authorization.FirstOrDefault();
+        if (string.IsNullOrEmpty(authHeader) || !authHeader.StartsWith("Basic ", StringComparison.OrdinalIgnoreCase))
+        {
+            return (request.ClientId, request.ClientSecret);
+        }
+
+        try
+        {
+            var encodedCredentials = authHeader.Substring(6); // Skip "Basic "
+            var decodedBytes = Convert.FromBase64String(encodedCredentials);
+            var decodedString = Encoding.UTF8.GetString(decodedBytes);
+
+            var colonIndex = decodedString.IndexOf(':');
+            if (colonIndex == -1)
+            {
+                return (null, null);
+            }
+
+            var clientId = decodedString.Substring(0, colonIndex);
+            var clientSecret = decodedString.Substring(colonIndex + 1);
+
+            return (clientId, clientSecret);
+        }
+        catch
+        {
+            return (null, null);
+        }
+    }
 
     private TokenResponse IssueToken(string clientId, IEnumerable<string> scopes)
     {

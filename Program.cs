@@ -79,7 +79,7 @@ app.MapScalarApiReference("/docs", options =>
                 scheme.WithFlows(flows =>
                     flows.WithClientCredentials(cc =>
                         cc.WithClientId("demo-client")
-                            .WithClientSecret("demo-secret"))));
+                            .WithClientSecret("demo-secret").WithSelectedScopes("sales:read"))));
 
     if (!string.IsNullOrEmpty(serverUrl))
         options.Servers = [new ScalarServer(serverUrl)];
