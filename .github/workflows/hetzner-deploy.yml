@@ -1,0 +1,44 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Hetzner deploy
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '.idea/**'
+
+jobs:
+  build:
+    name: Build & Deploy
+    runs-on: [self-hosted, hetzner]
+
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Build with dotnet
+      run: dotnet build --configuration Release
+
+    - name: dotnet publish
+      run: dotnet publish -c Release -o ./build_output
+
+    - name: stop service
+      continue-on-error: true
+      run: sudo systemctl stop salesapi.service
+
+    - name: Copy build output to local folder
+      run: |
+        rm -rf ~/salesapi/
+        mkdir -p ~/salesapi
+        cp -r ./build_output/* ~/salesapi/
+
+    - name: start service
+      run: sudo systemctl start salesapi.service
+
+    - name: delay 3
+      run: sleep 3
+
+    - name: verify service started successfully
+      run: sudo systemctl is-active salesapi.service
